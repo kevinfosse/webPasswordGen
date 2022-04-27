@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Password Generator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="normalize.css">
 </head>
+
 <body>
-    
-    <div id="app">  
+
+    <div id="app">
         <div class="title">
-            <h4>Golang Password API Test</h4>
+            <h4>Password Generator</h4>
         </div>
         <div id="password">
-            <p id="pass_text"></p>
+            <p id="pass_text" onclick="copy(this)"></p>
         </div>
-        <div class="generate">
-            <input type="submit" id="newPassword" value="Generate new password">
-        </div>
+
 
         <div class="round-time-bar" id="t" style="--duration: 35;" data-style="smooth">
             <div></div>
-          </div>
+        </div>
+
+
+
+    </div>
+    <div class="settings">
+        <div id="length">
+            <input type="range" min="1" max="100" value="8" class="slider" id="myRange" />
+            <p>Password lenght : <span id="value"></span></p>
+
+        </div>
+
+        <div id="info">
+            <p>Press the password to copy it to the clipboard!</p>
+        </div>
 
     </div>
 
     <div class="footer">
-        <p><a href="https://github.com/kevinfosse"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt=""></a></p>
-      </div>
+        <p><a href="https://github.com/kevinfosse"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt=""></a></p>
+    </div>
     <script src="script.js"></script>
 </body>
+
 </html>

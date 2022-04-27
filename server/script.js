@@ -3,49 +3,84 @@ console.log("JS Chargé")
 const api_password = "http://localhost:8080/api/generate"
 var app = document.querySelector("#pass_text")
 const cooldown = document.getElementById("t");
+var slider = document.getElementById("myRange");
+var output = document.getElementById("value");
 
 
-document.getElementById("newPassword").addEventListener("click", generatePassword);
 
-  function generatePassword() {
 
-    fetch(api_password)
-  .then(response => {
+
+function generatePassword() {
+
+  fetch(api_password)
+    .then(response => {
       if (!response.ok) {
-          throw Error("ERROR");
+        throw Error("ERROR");
       }
       return response.json();
-  })
-  .then(data => {
-  
-      const html = `<p>${data.password}</p>`
+    })
+    .then(data => {
+
+      const html = `${data.password}`
       app.innerHTML = html
-      
-  })
-  .catch(error => {
+      output.innerHTML = data.lenght
+      slider.value = data.lenght
+
+
+    })
+    .catch(error => {
       console.log(error);
-      app.innerHTML ="erreor"
-  });
-   
+      app.innerHTML = "erreor"
+    });
+
   cooldown.classList.remove("round-time-bar");
   cooldown.offsetWidth;
   cooldown.classList.add("round-time-bar");
 
 }
 
-function copyClipboard() {
-    var copyText = app
+function copy(that) {
+  var inp = document.createElement('input');
+  document.body.appendChild(inp)
+  inp.value = that.textContent
+  inp.select();
+  document.execCommand('copy', false);
+  inp.remove();
+  var temp = that.textContent
+  that.classList.toggle('fade')
+  that.textContent = "Copied!"
+  setTimeout(() => {
+    that.textContent = temp;
+    that.classList.toggle('fade');
+    generatePassword();
+  }, 800);
 
-    /* Select the text field */
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /* For mobile devices */
-  
-     /* Copy the text inside the text field */
-    navigator.clipboard.writeText(copyText.value);
-  
-    /* Alert the copied text */
-    alert("Copied the text: " + copyText.value);
+
+
 }
+
+slider.oninput = function () {
+  output.innerHTML = this.value;
+
+  var dataObject = {
+    "lenght": this.value,
+  }
+
+  fetch('http://localhost:8080/api/parameter', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataObject)
+  }).then(response => {
+    return response.json()
+  }).then(data =>
+    // this is the data we get after putting our data,
+    app.innerHTML = `${data.password}`
+  );
+}
+
+
 
 generatePassword()
 
