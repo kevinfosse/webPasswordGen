@@ -46,11 +46,11 @@ Start the server
 
 ## Roadmap
 
-- Ajouter des paramètres à la génération de mot de passe
+- Ajouter des paramètres à la génération de mot de passe [1/3] 
 
-- Bloquer la progressbar lorsque l'utilisateur selectionne le mot de passe
+- ~~Bloquer la progressbar lorsque l'utilisateur selectionne le mot de passe~~
 
-- Copier le mot de passe lors du clique
+- ~~Copier le mot de passe lors du clique~~
 
 
 
